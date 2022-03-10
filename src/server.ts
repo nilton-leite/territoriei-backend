@@ -7,23 +7,44 @@ import Container from './configs/ioc'
 import AuthenticationMiddleware from './middlewares/authentication'
 import cors from 'cors'
 
+import { UsersController } from './controllers/users'
+import { GroupController } from './controllers/group'
+import { DistrictController } from './controllers/district'
+import { ReportController } from './controllers/report'
+import { RequestController } from './controllers/request'
+
 export class Server {
   private app: Express
   private port: number
   private logType: string
   private logger: Logger
+  private usersController: UsersController
+  private groupController: GroupController
+  private districtController: DistrictController
+  private reportController: ReportController
+  private requestController: RequestController
 
   constructor({
     app,
     port,
     nodeEnv,
     logger,
+    usersController,
+    groupController,
+    districtController,
+    reportController,
+    requestController,
   }: Container) {
     this.app = app
     this.port = port
     this.logType =
       nodeEnv === 'dev' ? 'dev' : ':method :url :status :response-time'
     this.logger = logger
+    this.usersController = usersController
+    this.groupController = groupController
+    this.districtController = districtController
+    this.reportController = reportController
+    this.requestController = requestController
   }
 
   private async init(): Promise<void> {
@@ -49,6 +70,11 @@ export class Server {
 
   private async setupRoutes(): Promise<void> {
     const router = await routes({
+      usersController: this.usersController,
+      groupController: this.groupController,
+      districtController: this.districtController,
+      reportController: this.reportController,
+      requestController: this.requestController,
     })
 
     this.app.use(router)
