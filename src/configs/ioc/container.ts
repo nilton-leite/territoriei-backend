@@ -4,6 +4,20 @@ import { Server } from '@src/server'
 import { Knex } from 'knex'
 import { MongoDB } from '@src/configs/databases/mongo'
 
+import { GroupController } from '@src/controllers/group'
+import { UsersController } from '@src/controllers/users'
+import { DistrictController } from '@src/controllers/district'
+import { ReportController } from '@src/controllers/report'
+
+import { IGroupService } from '@src/services/group'
+import { IUsersService } from '@src/services/users'
+import { IDistrictService } from '@src/services/district'
+import { IReportService } from '@src/services/report'
+
+import { IGroupRepository } from '@src/repositories/group'
+import { IUsersRepository } from '@src/repositories/users'
+import { IDistrictRepository } from '@src/repositories/district'
+import { IReportRepository } from '@src/repositories/report'
 
 interface Container {
   // CONFIGS --------------------------------------------
@@ -23,10 +37,22 @@ interface Container {
   server: Server
 
   // CONTROLLERS ----------------------------------------
+  groupController: GroupController
+  usersController: UsersController
+  districtController: DistrictController
+  reportController: ReportController
 
   // SERVICES -------------------------------------------
+  groupService: IGroupService
+  usersService: IUsersService
+  districtService: IDistrictService
+  reportService: IReportService
 
   // REPOSITORIES ---------------------------------------
+  groupRepository: IGroupRepository
+  usersRepository: IUsersRepository
+  districtRepository: IDistrictRepository
+  reportRepository: IReportRepository
 }
 
 export default Container

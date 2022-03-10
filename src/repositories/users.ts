@@ -1,11 +1,11 @@
-import Container from '@src/configs/ioc'
-import UsersModel from '@src/models/users'
+import Container from '../configs/ioc'
+import UsersModel from '../models/users'
 import {
   ICreate,
   IFindOne,
   IFindOneLogin,
   IUpdate,
-} from '@src/utils/types/models/users'
+} from '../utils/types/models/users'
 import { Types } from 'mongoose'
 
 export interface IUsersRepository {

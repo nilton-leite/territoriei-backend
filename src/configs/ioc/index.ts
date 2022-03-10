@@ -7,7 +7,20 @@ import { Server } from '@src/server'
 import logger from '@src/configs/logs/winston'
 import { MongoDB } from '@src/configs/databases/mongo'
 
+import { GroupController } from '@src/controllers/group'
+import { UsersController } from '@src/controllers/users'
+import { DistrictController } from '@src/controllers/district'
+import { ReportController } from '@src/controllers/report'
 
+import { GroupService } from '@src/services/group'
+import { UsersService } from '@src/services/users'
+import { DistrictService } from '@src/services/district'
+import { ReportService } from '@src/services/report'
+
+import { GroupRepository } from '@src/repositories/group'
+import { UsersRepository } from '@src/repositories/users'
+import { DistrictRepository } from '@src/repositories/district'
+import { ReportRepository } from '@src/repositories/report'
 
 export async function createContainer(): Promise<awilix.AwilixContainer<any>> {
   const container = awilix.createContainer()
@@ -36,10 +49,22 @@ export async function createContainer(): Promise<awilix.AwilixContainer<any>> {
     server: awilix.asClass(Server),
 
     // CONTROLLERS -------------------------------------------------------------------
+    groupController: awilix.asClass(GroupController),
+    usersController: awilix.asClass(UsersController),
+    districtController: awilix.asClass(DistrictController),
+    reportController: awilix.asClass(ReportController),
 
     // SERVICES ----------------------------------------------------------------------
+    groupService: awilix.asFunction(GroupService),
+    usersService: awilix.asFunction(UsersService),
+    districtService: awilix.asFunction(DistrictService),
+    reportService: awilix.asFunction(ReportService),
 
     // REPOSITORIES ------------------------------------------------------------------
+    groupRepository: awilix.asFunction(GroupRepository),
+    usersRepository: awilix.asFunction(UsersRepository),
+    districtRepository: awilix.asFunction(DistrictRepository),
+    reportRepository: awilix.asFunction(ReportRepository),
   }
 
   container.register(configs)
