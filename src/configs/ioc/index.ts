@@ -11,16 +11,19 @@ import { GroupController } from '@src/controllers/group'
 import { UsersController } from '@src/controllers/users'
 import { DistrictController } from '@src/controllers/district'
 import { ReportController } from '@src/controllers/report'
+import { RequestController } from '@src/controllers/request'
 
 import { GroupService } from '@src/services/group'
 import { UsersService } from '@src/services/users'
 import { DistrictService } from '@src/services/district'
 import { ReportService } from '@src/services/report'
+import { RequestService } from '@src/services/request'
 
 import { GroupRepository } from '@src/repositories/group'
 import { UsersRepository } from '@src/repositories/users'
 import { DistrictRepository } from '@src/repositories/district'
 import { ReportRepository } from '@src/repositories/report'
+import { RequestRepository } from '@src/repositories/request'
 
 export async function createContainer(): Promise<awilix.AwilixContainer<any>> {
   const container = awilix.createContainer()
@@ -53,18 +56,21 @@ export async function createContainer(): Promise<awilix.AwilixContainer<any>> {
     usersController: awilix.asClass(UsersController),
     districtController: awilix.asClass(DistrictController),
     reportController: awilix.asClass(ReportController),
+    requestController: awilix.asClass(RequestController),
 
     // SERVICES ----------------------------------------------------------------------
     groupService: awilix.asFunction(GroupService),
     usersService: awilix.asFunction(UsersService),
     districtService: awilix.asFunction(DistrictService),
     reportService: awilix.asFunction(ReportService),
+    requestService: awilix.asFunction(RequestService),
 
     // REPOSITORIES ------------------------------------------------------------------
     groupRepository: awilix.asFunction(GroupRepository),
     usersRepository: awilix.asFunction(UsersRepository),
     districtRepository: awilix.asFunction(DistrictRepository),
     reportRepository: awilix.asFunction(ReportRepository),
+    requestRepository: awilix.asFunction(RequestRepository),
   }
 
   container.register(configs)
