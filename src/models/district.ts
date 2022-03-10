@@ -10,11 +10,11 @@ const schema = new Schema(
   {
     description: { type: String, required: true },
   },
-  { collection: 'description', timestamps: { createdAt: 'createdAt' } }
+  { collection: 'districts', timestamps: { createdAt: 'createdAt' } }
 )
 
 const DistrictModel: IDistrictModels = model<IDistrict, IDistrictModels>(
-  'district',
+  'districts',
   schema
 )
 export default DistrictModel

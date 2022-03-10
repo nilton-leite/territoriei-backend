@@ -10,7 +10,7 @@ const schema = new Schema(
   {
     description: { type: String, required: true },
   },
-  { collection: 'description', timestamps: { createdAt: 'createdAt' } }
+  { collection: 'groups', timestamps: { createdAt: 'createdAt' } }
 )
 
 const GroupModel: IGroupModels = model<IGroup, IGroupModels>('group', schema)

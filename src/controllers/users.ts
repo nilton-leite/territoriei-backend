@@ -4,6 +4,7 @@ import Container from '../configs/ioc'
 import { Logger } from 'winston'
 import dotenv from 'dotenv'
 import jsonwebtoken from 'jsonwebtoken'
+import { parse } from 'date-fns'
 import { IUsersService } from '../services/users'
 import {
   ICreate,
@@ -40,12 +41,15 @@ export class UsersController {
       tokenGoogle,
     } = req.body
 
+    const refereceDate = new Date()
+    refereceDate.setHours(23, 59, 59, 999)
+
     let parameters: ICreate = {
       full_name: full_name,
       telephone: telephone,
       email: email,
-      birth_date: birth_date,
-      group_id: group_id,
+      birth_date: parse(birth_date, 'yyyy-MM-dd', refereceDate),
+      group_id: Types.ObjectId(group_id),
       token_firebase_messaging: tokenFirebaseMessaging,
       token_firebase: tokenFirebase,
       token_facebook: tokenFacebook,
@@ -70,10 +74,13 @@ export class UsersController {
   public async update(req: Request, res: Response) {
     const { full_name, telephone, birth_date, group_id, id } = req.body
 
+    const refereceDate = new Date()
+    refereceDate.setHours(23, 59, 59, 999)
+
     let parameters: IUpdate = {
       full_name: full_name,
       telephone: telephone,
-      birth_date: birth_date,
+      birth_date: parse(birth_date, 'yyyy-MM-dd', refereceDate),
       group_id: group_id,
     }
 

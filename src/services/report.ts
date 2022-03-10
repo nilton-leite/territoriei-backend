@@ -5,7 +5,8 @@ import { IUpdate, ICreate } from '../utils/types/models/report'
 export interface IReportService {
   create(params: { data: ICreate }): Promise<any>
   updateOne(params: { data: IUpdate }, id: Types.ObjectId): Promise<any>
-  get(userId: Types.ObjectId): Promise<any>
+  getById(_id: Types.ObjectId): Promise<any>
+  get(): Promise<any>
 }
 
 export const ReportService = ({
@@ -20,8 +21,12 @@ export const ReportService = ({
       const saveData: any = await reportRepository.updateOne(data.data, id)
       return saveData
     },
-    get: async (userId) => {
-      const getData: any = await reportRepository.get(userId)
+    getById: async (_id) => {
+      const getData: any = await reportRepository.getById(_id)
+      return getData
+    },
+    get: async () => {
+      const getData: any = await reportRepository.get()
       return getData
     },
   }

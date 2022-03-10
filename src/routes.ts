@@ -34,18 +34,19 @@ export default async ({
 
   // Group routes
   router.post('/group', groupController.create.bind(groupController))
-  router.get('/group', groupController.create.bind(groupController))
+  router.get('/group', groupController.get.bind(groupController))
 
   // District routes
   router.post('/district', districtController.create.bind(districtController))
-  router.get('/district', districtController.create.bind(districtController))
+  router.get('/district', districtController.get.bind(districtController))
 
   // Report routes
   router.post('/report', reportController.create.bind(reportController))
-  router.get('/report', reportController.create.bind(reportController))
+  router.get('/report', reportController.get.bind(reportController))
+  router.get('/report/:id', reportController.getById.bind(reportController))
 
   // Request routes
   router.post('/request', requestController.create.bind(requestController))
-  router.get('/request', requestController.create.bind(requestController))
+  router.get('/request', requestController.get.bind(requestController))
   return router
 }

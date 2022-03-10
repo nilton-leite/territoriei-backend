@@ -27,8 +27,8 @@ export class ReportController {
 
     let parameters: ICreate = {
       report_id,
-      group_id,
-      district_id,
+      group_id: Types.ObjectId(group_id),
+      district_id: Types.ObjectId(district_id),
       streets,
       card,
       qtde_blocks,
@@ -37,7 +37,12 @@ export class ReportController {
     const retorno = await this.reportService.create({ data: parameters })
     return res.status(status.OK).send({
       _id: retorno._id,
-      description: retorno.description,
+      report_id: retorno.report_id,
+      group_id: retorno.group_id,
+      district_id: retorno.district_id,
+      streets: retorno.streets,
+      card: retorno.card,
+      qtde_blocks: retorno.qtde_blocks,
     })
   }
 
@@ -47,29 +52,38 @@ export class ReportController {
 
     let parameters: IUpdate = {
       report_id,
-      group_id,
-      district_id,
+      group_id: Types.ObjectId(group_id),
+      district_id: Types.ObjectId(district_id),
       streets,
       card,
       qtde_blocks,
     }
 
     await this.reportService.updateOne({ data: parameters }, Types.ObjectId(id))
-    const retorno = await this.reportService.get(Types.ObjectId(id))
+    const retorno = await this.reportService.getById(Types.ObjectId(id))
     return res.status(status.OK).send(retorno)
   }
 
-  async get(req: Request, res: Response) {
-    const { id } = req.body
+  async getById(req: Request, res: Response) {
+    const { id } = req.params
 
     try {
       if (id) {
-        const retorno = await this.reportService.get(Types.ObjectId(id))
+        const retorno = await this.reportService.getById(Types.ObjectId(id))
 
-        return res.json([retorno])
+        return res.json(retorno)
       }
 
-      return res.json([])
+      return res.json({})
+    } catch (error: any) {
+      return res.status(400).send(error.message)
+    }
+  }
+
+  async get(req: Request, res: Response) {
+    try {
+      const retorno = await this.reportService.get()
+      return res.json(retorno)
     } catch (error: any) {
       return res.status(400).send(error.message)
     }
