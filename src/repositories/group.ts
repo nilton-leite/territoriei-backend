@@ -6,7 +6,8 @@ import { Types } from 'mongoose'
 export interface IGroupRepository {
   create(params: ICreate): Promise<any>
   updateOne(params: IUpdate, id: Types.ObjectId): Promise<any>
-  get(userId: Types.ObjectId): Promise<any>
+  get(): Promise<any>
+  getById(id: Types.ObjectId): Promise<any>
 }
 
 export const GroupRepository = ({}: Container): IGroupRepository => {
@@ -19,8 +20,12 @@ export const GroupRepository = ({}: Container): IGroupRepository => {
       const item = await GroupModel.updateOne({ _id: id }, params)
       return item
     },
-    get: async (userId: Types.ObjectId) => {
-      const item = await GroupModel.findOne({ _id: userId })
+    get: async () => {
+      const item = await GroupModel.findOne()
+      return item
+    },
+    getById: async (id) => {
+      const item = await GroupModel.findOne({ _id: id })
       return item
     },
   }

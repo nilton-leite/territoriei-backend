@@ -5,7 +5,8 @@ import { IUpdate, ICreate } from '../utils/types/models/group'
 export interface IGroupService {
   create(params: { data: ICreate }): Promise<any>
   updateOne(params: { data: IUpdate }, id: Types.ObjectId): Promise<any>
-  get(userId: Types.ObjectId): Promise<any>
+  get(): Promise<any>
+  getById(id: Types.ObjectId): Promise<any>
 }
 
 export const GroupService = ({ groupRepository }: Container): IGroupService => {
@@ -18,8 +19,12 @@ export const GroupService = ({ groupRepository }: Container): IGroupService => {
       const saveData: any = await groupRepository.updateOne(data.data, id)
       return saveData
     },
-    get: async (userId) => {
-      const getData: any = await groupRepository.get(userId)
+    get: async () => {
+      const getData: any = await groupRepository.get()
+      return getData
+    },
+    getById: async (id) => {
+      const getData: any = await groupRepository.getById(id)
       return getData
     },
   }

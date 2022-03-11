@@ -41,21 +41,14 @@ export class GroupController {
     }
 
     await this.groupService.updateOne({ data: parameters }, Types.ObjectId(id))
-    const retorno = await this.groupService.get(Types.ObjectId(id))
+    const retorno = await this.groupService.getById(Types.ObjectId(id))
     return res.status(status.OK).send(retorno)
   }
 
   async get(req: Request, res: Response) {
-    const { id } = req.body
-
     try {
-      if (id) {
-        const retorno = await this.groupService.get(Types.ObjectId(id))
-
-        return res.json([retorno])
-      }
-
-      return res.json([])
+      const retorno = await this.groupService.get()
+      return res.json(retorno)
     } catch (error: any) {
       return res.status(400).send(error.message)
     }
