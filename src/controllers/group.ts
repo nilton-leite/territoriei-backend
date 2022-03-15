@@ -53,4 +53,19 @@ export class GroupController {
       return res.status(400).send(error.message)
     }
   }
+
+  async getById(req: Request, res: Response) {
+    const { id } = req.params
+    try {
+      if (id) {
+        const retorno = await this.groupService.getById(Types.ObjectId(id))
+
+        return res.json(retorno)
+      }
+
+      return res.json({})
+    } catch (error: any) {
+      return res.status(400).send(error.message)
+    }
+  }
 }

@@ -35,6 +35,7 @@ export default async ({
   // Group routes
   router.post('/group', groupController.create.bind(groupController))
   router.get('/group', groupController.get.bind(groupController))
+  router.get('/group/:id', groupController.getById.bind(groupController))
 
   // District routes
   router.post('/district', districtController.create.bind(districtController))
