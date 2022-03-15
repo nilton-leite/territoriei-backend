@@ -21,7 +21,7 @@ export const GroupRepository = ({}: Container): IGroupRepository => {
       return item
     },
     get: async () => {
-      const item = await GroupModel.findOne()
+      const item = await GroupModel.find()
       return item
     },
     getById: async (id) => {
