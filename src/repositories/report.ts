@@ -55,6 +55,7 @@ export const ReportRepository = ({}: Container): IReportRepository => {
             'districts.description': 1,
             qtde_blocks: 1,
             streets: 1,
+            report_id: 1,
           },
         },
       ])
@@ -89,6 +90,7 @@ export const ReportRepository = ({}: Container): IReportRepository => {
             'districts.description': 1,
             qtde_blocks: 1,
             streets: 1,
+            report_id: 1,
           },
         },
       ])
@@ -128,6 +130,7 @@ export const ReportRepository = ({}: Container): IReportRepository => {
             'districts.description': 1,
             qtde_blocks: 1,
             streets: 1,
+            report_id: 1,
           },
         },
       ])
