@@ -88,4 +88,20 @@ export class ReportController {
       return res.status(400).send(error.message)
     }
   }
+
+  async getByGroup(req: Request, res: Response) {
+    const { id } = req.params
+
+    try {
+      if (id) {
+        const retorno = await this.reportService.getByGroup(Types.ObjectId(id))
+
+        return res.json(retorno)
+      }
+
+      return res.json({})
+    } catch (error: any) {
+      return res.status(400).send(error.message)
+    }
+  }
 }

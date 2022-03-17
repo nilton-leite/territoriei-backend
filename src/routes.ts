@@ -44,6 +44,10 @@ export default async ({
   // Report routes
   router.post('/report', reportController.create.bind(reportController))
   router.get('/report', reportController.get.bind(reportController))
+  router.get(
+    '/reportbyGroup/:id',
+    reportController.getByGroup.bind(reportController)
+  )
   router.get('/report/:id', reportController.getById.bind(reportController))
 
   // Request routes

@@ -8,6 +8,7 @@ export interface IReportRepository {
   updateOne(params: IUpdate, id: Types.ObjectId): Promise<any>
   getById(_id: Types.ObjectId): Promise<any>
   get(): Promise<any>
+  getByGroup(_id: Types.ObjectId): Promise<any>
 }
 
 export const ReportRepository = ({}: Container): IReportRepository => {
@@ -61,6 +62,45 @@ export const ReportRepository = ({}: Container): IReportRepository => {
     },
     get: async () => {
       const item = await ReportModel.aggregate([
+        {
+          $lookup: {
+            from: 'groups',
+            localField: 'group_id',
+            foreignField: '_id',
+            as: 'groups',
+          },
+        },
+        { $unwind: '$groups' },
+        {
+          $lookup: {
+            from: 'districts',
+            localField: 'district_id',
+            foreignField: '_id',
+            as: 'districts',
+          },
+        },
+        { $unwind: '$districts' },
+        {
+          $project: {
+            _id: 1,
+            'groups._id': 1,
+            'groups.description': 1,
+            'districts._id': 1,
+            'districts.description': 1,
+            qtde_blocks: 1,
+            streets: 1,
+          },
+        },
+      ])
+      return item
+    },
+    getByGroup: async (_id: Types.ObjectId) => {
+      const item = await ReportModel.aggregate([
+        {
+          $match: {
+            group_id: _id,
+          },
+        },
         {
           $lookup: {
             from: 'groups',

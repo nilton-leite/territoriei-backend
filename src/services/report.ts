@@ -7,6 +7,7 @@ export interface IReportService {
   updateOne(params: { data: IUpdate }, id: Types.ObjectId): Promise<any>
   getById(_id: Types.ObjectId): Promise<any>
   get(): Promise<any>
+  getByGroup(_id: Types.ObjectId): Promise<any>
 }
 
 export const ReportService = ({
@@ -27,6 +28,10 @@ export const ReportService = ({
     },
     get: async () => {
       const getData: any = await reportRepository.get()
+      return getData
+    },
+    getByGroup: async (_id) => {
+      const getData: any = await reportRepository.getByGroup(_id)
       return getData
     },
   }
