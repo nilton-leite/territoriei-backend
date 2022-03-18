@@ -8,7 +8,7 @@ export interface IReport extends Document {
   streets: [String]
   card: String
   qtde_blocks: Number
-  status: IStatus
+  status?: IStatus
 }
 
 interface IReportModels extends Model<IReport> {}
@@ -24,7 +24,7 @@ const schema = new Schema(
     status: {
       type: String,
       enum: IStatus,
-      required: true,
+      required: false,
       default: IStatus.AVAILABLE,
     },
   },

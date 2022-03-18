@@ -4,7 +4,7 @@ import { IStatus } from '../utils/types/models/request'
 export interface IRequest extends Document {
   report_id: Types.ObjectId
   user_id: Types.ObjectId
-  status: IStatus
+  status?: IStatus
   reply_date: Date
   withdrawn_date: Date
   return_date: Date
@@ -20,7 +20,7 @@ const schema = new Schema(
     status: {
       type: String,
       enum: IStatus,
-      required: true,
+      required: false,
       default: IStatus.PENDING,
     },
     reply_date: { type: Date, required: true },

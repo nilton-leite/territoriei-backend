@@ -10,7 +10,7 @@ export enum IStatus {
 export interface ICreate {
   report_id: Types.ObjectId
   user_id: Types.ObjectId
-  status: IStatus
+  status?: IStatus
   reply_date: Date
   withdrawn_date: Date
   return_date: Date
@@ -19,7 +19,7 @@ export interface ICreate {
 export interface IUpdate {
   report_id: Types.ObjectId
   user_id: Types.ObjectId
-  status: IStatus
+  status?: IStatus
   reply_date: Date
   withdrawn_date: Date
   return_date: Date

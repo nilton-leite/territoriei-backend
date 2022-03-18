@@ -13,7 +13,7 @@ export interface ICreate {
   streets: [String]
   card: String
   qtde_blocks: Number
-  status: IStatus
+  status?: IStatus
 }
 export interface IUpdate {
   report_id: Number
@@ -22,6 +22,7 @@ export interface IUpdate {
   streets: [String]
   card: String
   qtde_blocks: Number
+  status?: IStatus
 }
 export interface IFindById {
   _id: Types.ObjectId
