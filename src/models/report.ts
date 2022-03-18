@@ -1,3 +1,4 @@
+import { IStatus } from '@src/utils/types/models/report'
 import { Document, Model, Schema, model, Types } from 'mongoose'
 
 export interface IReport extends Document {
@@ -7,6 +8,7 @@ export interface IReport extends Document {
   streets: [String]
   card: String
   qtde_blocks: Number
+  status: IStatus
 }
 
 interface IReportModels extends Model<IReport> {}
@@ -19,6 +21,12 @@ const schema = new Schema(
     streets: { type: [String], required: true },
     card: { type: String, required: true },
     qtde_blocks: { type: Number, required: true },
+    status: {
+      type: String,
+      enum: IStatus,
+      required: true,
+      default: IStatus.AVAILABLE,
+    },
   },
   { collection: 'reports', timestamps: { createdAt: 'createdAt' } }
 )

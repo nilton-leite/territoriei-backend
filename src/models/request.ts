@@ -17,7 +17,12 @@ const schema = new Schema(
   {
     report_id: { type: Types.ObjectId, required: true },
     user_id: { type: Types.ObjectId, required: true },
-    status: { type: IStatus, required: true },
+    status: {
+      type: String,
+      enum: IStatus,
+      required: true,
+      default: IStatus.PENDING,
+    },
     reply_date: { type: Date, required: true },
     withdrawn_date: { type: Date, required: false },
     return_date: { type: Date, required: false },

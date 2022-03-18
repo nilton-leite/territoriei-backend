@@ -131,6 +131,7 @@ export const ReportRepository = ({}: Container): IReportRepository => {
             qtde_blocks: 1,
             streets: 1,
             report_id: 1,
+            status: 1,
           },
         },
       ])

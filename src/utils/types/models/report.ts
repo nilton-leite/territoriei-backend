@@ -1,4 +1,11 @@
 import { Types } from 'mongoose'
+
+export enum IStatus {
+  AVAILABLE = 'AVAILABLE',
+  UNAVAILABLE = 'UNAVAILABLE',
+  RESERVED = 'RESERVED',
+}
+
 export interface ICreate {
   report_id: Number
   group_id: Types.ObjectId
@@ -6,6 +13,7 @@ export interface ICreate {
   streets: [String]
   card: String
   qtde_blocks: Number
+  status: IStatus
 }
 export interface IUpdate {
   report_id: Number
